@@ -83,35 +83,16 @@ export function Aside() {
     }
 
     return (
-        <aside className="w-64 p-4 border-r border-primary h-svh">
-            <div className="mb-6">
-                <h3 className="font-semibold mb-2">Ordenar por</h3>
-                <ul className="space-y-1">
-                    {ordenes.map((orden) => (
-                        <li key={orden.id}>
-                            <Link
-                                className={`block px-3 py-2 rounded transition-colors ${
-                                    categoriaActual === orden.id
-                                    ? "bg-primary text-primary-foreground"
-                                    : "hover:bg-accent hover:text-accent-foreground"
-                                }`}
-                                href={crearURL("orden", orden.id)}>
-                                    {orden.nombre}
-                            </Link>
-                        </li>
-                    ))}
-
-                </ul>
-            </div>
-            <div className="mb-6">
-                <h3 className="font-semibold mb-2">Categorias</h3>
+        <aside className="w-64 p-6 border-r border-border bg-card h-screen sticky top-16">
+            <div className="mb-8">
+                <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground mb-3">Categorías</h3>
                 <ul className="space-y-1">
                     {categorias.map((cat) => (
                         <li key={cat.id}>
                             <Link
-                                className={`block px-3 py-2 rounded transition-colors ${
+                                className={`block px-4 py-3 rounded-lg transition-all duration-200 ${
                                     categoriaActual === cat.id
-                                    ? "bg-primary text-primary-foreground"
+                                    ? "bg-primary text-primary-foreground shadow-md"
                                     : "hover:bg-accent hover:text-accent-foreground"
                                 }`}
                                 href={crearURL("categoria", cat.id)}>
@@ -119,10 +100,26 @@ export function Aside() {
                             </Link>
                         </li>
                     ))}
-
                 </ul>
             </div>
-            
+            <div className="mb-6">
+                <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground mb-3">Ordenar por</h3>
+                <ul className="space-y-1">
+                    {ordenes.map((orden) => (
+                        <li key={orden.id}>
+                            <Link
+                                className={`block px-4 py-3 rounded-lg transition-all duration-200 ${
+                                    categoriaActual === orden.id
+                                    ? "bg-primary text-primary-foreground shadow-md"
+                                    : "hover:bg-accent hover:text-accent-foreground"
+                                }`}
+                                href={crearURL("orden", orden.id)}>
+                                    {orden.nombre}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </aside>
     )
 }

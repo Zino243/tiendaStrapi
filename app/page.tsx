@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Header/>
-      <div className="flex flex-row">
+      <div className="flex flex-1">
         <Aside/>
         <Main/>
       </div>
