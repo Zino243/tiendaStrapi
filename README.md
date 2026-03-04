@@ -1,37 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tienda Reservas
 
-## Getting Started
+Tienda en línea con sistema de reservas desarrollada con Next.js y Strapi.
 
-First, run the development server:
+## Requisitos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js >= 20.x
+- npm >= 10.x
+
+## Estructura del proyecto
+
+```
+tienda-reservas/
+├── app/                    # Frontend Next.js (App Router)
+│   ├── components/         # Componentes React
+│   │   ├── product/       # Componentes de productos
+│   │   └── store/         # Estado global (Zustand)
+│   ├── shop/              # Página del carrito
+│   └── types/             # Tipos TypeScript
+├── backend/               # Backend Strapi
+│   └── src/
+│       ├── api/           # API de Strapi
+│       └── extensions/    # Extensiones del panel
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalación
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Clonar el proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone <repositorio>
+cd tienda-reservas
+```
 
-## Learn More
+### 2. Instalar dependencias del frontend
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Configurar variables de entorno
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copia el archivo de ejemplo y configúralo:
 
-## Deploy on Vercel
+```bash
+cp .env.example .env
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Edita `.env` con tu configuración:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# tiendaStrapi
+```env
+NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+```
+
+### 4. Instalar y configurar el backend (Strapi)
+
+```bash
+cd backend
+cp .env.example .env
+npm install
+```
+
+Edita `.env` con tus claves:
+
+```env
+HOST=0.0.0.0
+PORT=1337
+APP_KEYS="clave1,clave2"
+JWT_SECRET=tu_secreto
+```
+
+Inicia el backend:
+
+```bash
+npm run develop
+```
+
+El panel de Strapi estará en: http://localhost:1337/admin
+
+### 5. Configurar datos en Strapi
+
+1. Crea un tipo de colección llamado `Product` con los campos:
+   - `name` (Text)
+   - `description` (Rich Text)
+   - `price` (Number)
+   - `image` (Media)
+
+2. Añade algunos productos de prueba
+
+## Ejecución
+
+### Desarrollo (ambos servidores)
+
+```bash
+# Terminal 1 - Backend
+cd backend
+npm run develop
+
+# Terminal 2 - Frontend
+npm run dev
+```
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:1337
+
+### Producción
+
+```bash
+# Build frontend
+npm run build
+npm start
+
+# Build backend
+cd backend
+npm run build
+npm start
+```
+
+## Scripts disponibles
+
+### Frontend
+| Comando | Descripción |
+|---------|-------------|
+| `npm run dev` | Inicia el servidor de desarrollo |
+| `npm run build` | Genera build de producción |
+| `npm run start` | Inicia el servidor de producción |
+| `npm run lint` | Ejecuta el linter |
+
+### Backend
+| Comando | Descripción |
+|---------|-------------|
+| `npm run develop` | Inicia el servidor en desarrollo |
+| `npm run build` | Genera build de producción |
+| `npm run start` | Inicia el servidor de producción |
+
+## Tecnologías
+
+- **Frontend**: Next.js 16, React 19, Tailwind CSS 4, Zustand
+- **Backend**: Strapi 5, SQLite
+- **Tipado**: TypeScript
+
+## Características
+
+- Catálogo de productos desde Strapi
+- Carrito de compras con persistencia local
+- Diseño responsive con Tailwind CSS
+- Estilo de ticket de compra
